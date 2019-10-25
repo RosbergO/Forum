@@ -16,6 +16,7 @@ namespace Forum.Models
         }
 
         public virtual DbSet<TblCategories> TblCategories { get; set; }
+        public virtual DbSet<TblComments> TblComments { get; set; }
         public virtual DbSet<TblPosts> TblPosts { get; set; }
         public virtual DbSet<TblUser> TblUser { get; set; }
 
@@ -46,6 +47,33 @@ namespace Forum.Models
                     .IsRequired()
                     .HasColumnName("Ca_Name")
                     .HasMaxLength(20);
+            });
+
+            modelBuilder.Entity<TblComments>(entity =>
+            {
+                entity.HasKey(e => e.CoId);
+
+                entity.ToTable("Tbl_Comments");
+
+                entity.Property(e => e.CoId).HasColumnName("Co_ID");
+
+                entity.Property(e => e.CoAuthor).HasColumnName("Co_Author");
+
+                entity.Property(e => e.CoContent)
+                    .IsRequired()
+                    .HasColumnName("Co_Content")
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.CoDate)
+                    .HasColumnName("Co_Date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CoPost).HasColumnName("Co_Post");
+
+                entity.HasOne(d => d.CoPostNavigation)
+                    .WithMany(p => p.TblComments)
+                    .HasForeignKey(d => d.CoPost)
+                    .HasConstraintName("FK_Tbl_Co_Tbl_Po");
             });
 
             modelBuilder.Entity<TblPosts>(entity =>

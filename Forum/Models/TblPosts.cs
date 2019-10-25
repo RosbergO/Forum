@@ -5,6 +5,11 @@ namespace Forum.Models
 {
     public partial class TblPosts
     {
+        public TblPosts()
+        {
+            TblComments = new HashSet<TblComments>();
+        }
+
         public int PoId { get; set; }
         public string PoName { get; set; }
         public string PoContent { get; set; }
@@ -14,5 +19,6 @@ namespace Forum.Models
 
         public TblUser PoAuthorNavigation { get; set; }
         public TblCategories PoCategoryNavigation { get; set; }
+        public ICollection<TblComments> TblComments { get; set; }
     }
 }
