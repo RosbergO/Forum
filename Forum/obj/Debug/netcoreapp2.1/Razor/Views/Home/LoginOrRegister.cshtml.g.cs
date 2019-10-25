@@ -61,7 +61,7 @@ using Forum.Models;
             WriteLiteral("\r\n<h1>Registration and Login page</h1>\r\n\r\n");
             EndContext();
             BeginContext(100, 838, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1aedef1f6c5841cba5739ea0c46a7082", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4f64e2eb52446729f64807a50c526d7", async() => {
                 BeginContext(124, 807, true);
                 WriteLiteral(@"
     <div class=""form-group"">
