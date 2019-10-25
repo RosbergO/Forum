@@ -22,6 +22,11 @@ namespace Forum.Controllers
             return View();
         }
 
+        public IActionResult ViewTest()
+        {
+            return View();
+        }
+
         public void RunStoredProcParams(int i)
         {
             SqlConnection conn = null;
