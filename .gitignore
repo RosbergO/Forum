@@ -17,3 +17,7 @@ Forum/obj/Forum.csproj.nuget.cache
 Forum/obj/Forum.csproj.nuget.dgspec.json
 
 Forum/obj/Forum.csproj.nuget.g.props
+
+Forum/bin/
+
+Forum/obj/Debug/

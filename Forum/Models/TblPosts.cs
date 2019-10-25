@@ -7,10 +7,7 @@ namespace Forum.Models
 {
     public partial class TblPosts
     {
-        public TblPosts(int PoID, string PoName, string PoContent, DateTime PoDate, int PoAuthor, int PoCategory)
-        {
-            TblComments = new HashSet<TblComments>();
-        }
+        
 
         public int PoId { get; set; }
         public string PoName { get; set; }
@@ -18,7 +15,16 @@ namespace Forum.Models
         public DateTime PoDate { get; set; }
         public int PoAuthor { get; set; }
         public int PoCategory { get; set; }
-
+        public TblPosts(int PoID, string PoName, string PoContent, DateTime PoDate, int PoAuthor, int PoCategory)
+        {
+            this.PoId = PoId;
+            this.PoName = PoName;
+            this.PoContent = PoContent;
+            this.PoDate = PoDate;
+            this.PoAuthor = PoAuthor;
+            this.PoCategory = PoCategory;
+            TblComments = new HashSet<TblComments>();
+        }
         public TblUser PoAuthorNavigation { get; set; }
         public TblCategories PoCategoryNavigation { get; set; }
         public ICollection<TblComments> TblComments { get; set; }
