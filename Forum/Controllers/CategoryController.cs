@@ -27,6 +27,11 @@ namespace Forum.Controllers
             return View();
         }
 
+        public ActionResult SelectWithDataSet()
+        {
+            
+        }
+
         public void RunStoredProcParams(int i)
         {
             SqlConnection conn = null;
