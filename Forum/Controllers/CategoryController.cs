@@ -18,14 +18,11 @@ namespace Forum.Controllers
         {
             return View();
         }
-        public IActionResult Posts()
-        {
-            return View();
-        }
+   
 
-        public IActionResult ViewTest(int i)
+        public IActionResult Posts(int id)
         {
-            List<TblPosts> postList = SelectWithDataSet(1);
+            List<TblPosts> postList = SelectWithDataSet(id);
 
             return View(postList);
         } 
