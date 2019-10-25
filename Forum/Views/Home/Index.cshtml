@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Welcome to the MonsterPlan forum</h1>
+<div id="LatestPosts">
+    <h3>Latest Posts</h3>
+    <ul class="list-group">
+        <li class="list-group-item">Latest Post 1</li>
+        <li class="list-group-item">Latest Post 2</li>
+        <li class="list-group-item">Latest Post 3</li>
+        <li class="list-group-item">Latest Post 4</li>
+        <li class="list-group-item">Latest Post 5</li>
+    </ul>
+</div>
+
+<div id="">
+    <h3>Forum categories</h3>
+    <ul class="list-group">
+        <li class="list-group-item"><a asp-area="" asp-controller="Home" asp-action="About" asp-route-id="1">General</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Home" asp-action="About" asp-route-id="2">Off Topic</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Home" asp-action="About" asp-route-id="3">Questions</a></li>
+    </ul>
+</div>
