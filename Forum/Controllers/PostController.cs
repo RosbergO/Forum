@@ -39,8 +39,7 @@ namespace Forum.Controllers
             string message = "";
             TblPosts.InsertPost(post, out message);
             ViewBag.message = message;
-            return View();
-
+            return RedirectToAction("Posts/" + post.PoCategory, "Category");
         }
     }
 }
