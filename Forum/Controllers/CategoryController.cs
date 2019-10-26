@@ -18,7 +18,6 @@ namespace Forum.Controllers
         {
             return View();
         }
-   
 
         public IActionResult Posts(int id)
         {

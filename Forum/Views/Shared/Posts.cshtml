@@ -2,14 +2,14 @@
 @model IEnumerable<Forum.Models.TblPosts>
 
 @{
-    ViewData["Title"] = "Post";
+    ViewData["Title"] = ViewBag.category;
 }
+    <h1>Welcome to the @ViewBag.category discussion</h1>
 
-<h2>View</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<button type="button" class="btn btn-primary">
+    <a <a asp-area="" asp-controller="Post" asp-action="Create" asp-route-id="@ViewBag.category">Create new thread</a>
+</button>
 <table class="table">
     <thead>
         <tr>
