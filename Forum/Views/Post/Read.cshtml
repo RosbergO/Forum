@@ -1,0 +1,54 @@
+﻿@model Forum.Models.TblPosts
+
+@{
+    ViewData["Title"] = "Read";
+}
+
+<h2>Read</h2>
+
+<div>
+    <h4>TblPosts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PoId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoContent)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoContent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoAuthor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoAuthor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoCategory)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoCategory)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

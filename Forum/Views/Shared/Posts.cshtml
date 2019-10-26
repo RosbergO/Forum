@@ -38,7 +38,7 @@
 @foreach (var item in Model) {
         <tr>
             <td> 
-                <a href="penis">
+                <a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
                      @Html.DisplayFor(modelItem => item.PoId)
                 </a>
             </td>

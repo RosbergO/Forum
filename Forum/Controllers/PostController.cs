@@ -16,6 +16,12 @@ namespace Forum.Controllers
         {
             return View();
         }
+
+        public IActionResult Read(int id)
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Create(string id)
         {
