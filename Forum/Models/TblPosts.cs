@@ -33,8 +33,7 @@ namespace Forum.Models
         {
             errorMessage = "";
 
-            SqlConnection dbConnection = new SqlConnection();
-            dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            SqlConnection dbConnection = new SqlConnection{ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"};
             string sqlString = @"INSERT INTO [Tbl_Posts] ([Po_Author], [Po_Category], [Po_Name], [Po_Content], [Po_Date]) 
 VALUES(@author, @category, @name, @content, @date)";
             SqlCommand dbcommand = new SqlCommand(sqlString, dbConnection);
@@ -43,7 +42,7 @@ VALUES(@author, @category, @name, @content, @date)";
             dbcommand.Parameters.Add("category", SqlDbType.Int).Value = postDetails.PoCategory;
             dbcommand.Parameters.Add("name", SqlDbType.NVarChar, 20).Value = postDetails.PoName;
             dbcommand.Parameters.Add("content", SqlDbType.NVarChar, 1000).Value = postDetails.PoContent;
-            dbcommand.Parameters.Add("date", SqlDbType.Date).Value = postDetails.PoDate;
+            dbcommand.Parameters.Add("date", SqlDbType.Date).Value = DateTime.Now;
 
             try
             {
