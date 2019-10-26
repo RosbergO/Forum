@@ -25,7 +25,7 @@ namespace Forum.Controllers
             
             List<TblPosts> postList = SelectWithDataSet(id);
             ViewBag.postList = postList;
-
+            ViewBag.userList = new List<TblUser>();
             return View(postList);
         } 
 
@@ -46,9 +46,7 @@ namespace Forum.Controllers
                 while (rdr.Read())
                 {
                     postList.Add(new TblPosts(int.Parse(rdr["Po_ID"].ToString()), rdr["Po_Name"].ToString(), rdr["Po_Content"].ToString(), Convert.ToDateTime(rdr["Po_Date"].ToString()), 1, int.Parse(rdr["Po_Category"].ToString())));
-                    //postList.Add(new TblPosts(int.Parse(rdr["Po_ID"].ToString()), rdr["Po_Name"].ToString(), rdr["Po_Content"].ToString(), Convert.ToDateTime(rdr["Po_Date"].ToString()), int.Parse(rdr["Po_Author"].ToString()), int.Parse(rdr["Po_Category"].ToString())));
-                    //postList.Add(new TblPosts(1, "Oscar", "HEj allihopA",DateTime.Now, 1, 1 ));    
-                    // Console.WriteLine("Product: {0,-35} Total: {1,2}", rdr["ProductName"], rdr["Total"]);
+                    ViewBag.userList.add(new TblUser() { UsName = rdr["Us_Name"].ToString()});
                 }
                 cmd.Dispose();
             }
