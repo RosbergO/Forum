@@ -12,7 +12,9 @@ namespace Forum.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            List<TblPosts> posts = TblPosts.GetLast5Posts();
+            
+            return View(posts);
         }
 
         public IActionResult About(int id)
