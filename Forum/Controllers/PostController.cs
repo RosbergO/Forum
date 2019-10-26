@@ -21,6 +21,7 @@ namespace Forum.Controllers
         {
             TblPosts post = TblPosts.GetPostFromID(id);
             ViewBag.category = TblCategories.GetCategory(post.PoCategory);
+            ViewBag.comments = TblComments.GetCommentsFromID(post.PoId);
             return View(post);
         }
 
