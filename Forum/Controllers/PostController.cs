@@ -16,6 +16,12 @@ namespace Forum.Controllers
         {
             return View();
         }
+
+        public IActionResult Read(int id)
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Create(string id)
         {
@@ -24,13 +30,9 @@ namespace Forum.Controllers
             ViewBag.category = id;
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(TblPosts post)
         {
-            string message = "";
-            TblPosts.InsertPost(post, out message);
-            ViewBag.message = message;
             return View();
 
         }
