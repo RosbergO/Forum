@@ -19,7 +19,9 @@ namespace Forum.Controllers
 
         public IActionResult Read(int id)
         {
-            return View();
+            TblPosts post = TblPosts.GetPostFromID(id);
+            ViewBag.category = TblCategories.GetCategory(post.PoCategory);
+            return View(post);
         }
 
         [HttpGet]
