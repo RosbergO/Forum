@@ -22,52 +22,21 @@ namespace Forum.Controllers
 
         public IActionResult Posts(int id)
         {
-            
-            List<TblPosts> postList = SelectWithDataSet(id);
+            ViewBag.userList = new List<string>();
+            List<TblPosts> postList = TblPosts.GetPostsFromCategory(id);
+            string category = TblCategories.GetCategory(id);
+            List<string> usernames = new List<string>();
+            foreach (TblPosts posts in postList)
+            {
+                usernames.Add(TblUser.GetUserFromID(posts.PoAuthor).UsName);
+            }
             ViewBag.postList = postList;
-            ViewBag.userList = new List<TblUser>();
+            ViewBag.category = category;
+            ViewBag.usernames = usernames;
+            
             return View(postList);
         } 
 
-        public List<TblPosts> SelectWithDataSet(int i)
-        {
-            List<TblPosts> postList = new List<TblPosts>();
-            SqlConnection conn = null;
-            SqlDataReader rdr = null;
-
-            try
-            {
-                conn = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("spGetPostsOnCategory", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Category_ID", i));
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    postList.Add(new TblPosts(int.Parse(rdr["Po_ID"].ToString()), rdr["Po_Name"].ToString(), rdr["Po_Content"].ToString(), Convert.ToDateTime(rdr["Po_Date"].ToString()), 1, int.Parse(rdr["Po_Category"].ToString())));
-                    ViewBag.userList.add(new TblUser() { UsName = rdr["Us_Name"].ToString()});
-                }
-                cmd.Dispose();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-            }
-            return postList;
-        }
     }
 
 }

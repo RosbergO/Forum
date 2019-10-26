@@ -21,3 +21,5 @@ Forum/obj/Forum.csproj.nuget.g.props
 Forum/bin/
 
 Forum/obj/Debug/
+
+Forum/obj/project.assets.json
