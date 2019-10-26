@@ -49,7 +49,15 @@
             </td>
             <td>
                 <a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
-                    @Html.DisplayFor(modelItem => item.PoContent)
+                     @{if(item.PoContent.Length > 60)
+                        {
+
+                            item.PoContent = item.PoContent.Substring(0, Math.Min(item.PoContent.Length, 60)) + "...";
+                        }
+                        
+                            @Html.DisplayFor(modelItem => item.PoContent);
+                        
+                     }
                 </a>
             </td>
             <td>

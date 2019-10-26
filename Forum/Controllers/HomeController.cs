@@ -17,21 +17,6 @@ namespace Forum.Controllers
             return View(posts);
         }
 
-        public IActionResult About(int id)
-        {
-            
-            Debug.WriteLine(id.ToString());
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
         public IActionResult LoginOrRegister()
         {
             ViewData["Message"] = "Login and registration page.";
@@ -39,10 +24,6 @@ namespace Forum.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
