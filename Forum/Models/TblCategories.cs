@@ -55,7 +55,7 @@ namespace Forum.Models
             }
             return output;
         }
-        public static int GetIDFromCategoryName(string category)
+        public static int GetCategory(string category)
         {
             List<TblPosts> postList = new List<TblPosts>();
             int output = 0;
