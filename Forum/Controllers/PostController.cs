@@ -17,14 +17,6 @@ namespace Forum.Controllers
             return View();
         }
 
-        public IActionResult Read(int id)
-        {
-            TblPosts post = TblPosts.GetPostFromID(id);
-            ViewBag.category = TblCategories.GetCategory(post.PoCategory);
-            ViewBag.comments = TblComments.GetCommentsFromID(post.PoId);
-            return View(post);
-        }
-
         [HttpGet]
         public IActionResult Create(string id)
         {
@@ -41,6 +33,20 @@ namespace Forum.Controllers
             TblPosts.InsertPost(post, out message);
             ViewBag.message = message;
             return RedirectToAction("Posts/" + post.PoCategory, "Category");
+        }
+
+        public IActionResult Read(int id)
+        {
+            TblPosts post = TblPosts.GetPostFromID(id);
+            ViewBag.category = TblCategories.GetCategory(post.PoCategory);
+            ViewBag.comments = TblComments.GetCommentsFromID(post.PoId);
+            return View(post);
+        }
+
+        public IActionResult Edit()
+        {
+
+            return View();
         }
     }
 }
