@@ -15,6 +15,7 @@ namespace Forum.Models
         public DateTime PoDate { get; set; }
         public int PoAuthor { get; set; }
         public int PoCategory { get; set; }
+        public TblPosts() { }
         public TblPosts(int PoID, string PoName, string PoContent, DateTime PoDate, int PoAuthor, int PoCategory)
         {
             this.PoId = PoID;

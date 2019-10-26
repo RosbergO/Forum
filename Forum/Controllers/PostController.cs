@@ -16,12 +16,19 @@ namespace Forum.Controllers
         {
             return View();
         }
-
-        public IActionResult Create(int id)
+        [HttpGet]
+        public IActionResult Create(string id)
         {
-            string category = TblCategories.GetCategory(id);
-            ViewBag.category = category;
+            int category = TblCategories.GetCategory(id);
+            ViewBag.categoryID = category;
+            ViewBag.category = id;
             return View();
+        }
+        [HttpPost]
+        public IActionResult Create(TblPosts post)
+        {
+            return View();
+
         }
     }
 }

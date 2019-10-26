@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create Cookie in @ViewBag.category</h2>
+<h2>Create post in @ViewBag.category</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,6 +19,11 @@
                 <label asp-for="PoContent" class="control-label"></label>
                 <input asp-for="PoContent" class="form-control" />
                 <span asp-validation-for="PoContent" class="text-danger"></span>
+            </div>
+            @Html.Hidden("PoAuthor", "2")
+            @Html.Hidden("PoCategory", (object)ViewBag.categoryID);
+            <div>
+                <label asp-for="PoAuthor" class="control-label" data-bind="1"></label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
