@@ -119,13 +119,13 @@ VALUES(@author, @category, @name, @content, @date)";
             {
                 conn = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("spGetPostsFromCategory", conn);
+                SqlCommand cmd = new SqlCommand("spGetPostFromID", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Category_ID", id));
+                cmd.Parameters.Add(new SqlParameter("@Post_ID", id));
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    output = new TblPosts() { PoAuthor = int.Parse(rdr["Po_Author"].ToString()), PoCategory = int.Parse(rdr["Po_Category"].ToString()), PoContent = rdr["Po_Content"].ToString(), PoDate = Convert.ToDateTime(rdr["Po_Date"].ToString()), PoName = rdr["Po_Name"].ToString() };
+                    output = new TblPosts() { PoAuthor = int.Parse(rdr["Po_Author"].ToString()), PoCategory = int.Parse(rdr["Po_Category"].ToString()), PoContent = rdr["Po_Content"].ToString(), PoDate = Convert.ToDateTime(rdr["Po_Date"].ToString()), PoName = rdr["Po_Name"].ToString(), PoId = int.Parse(rdr["Po_ID"].ToString()) };
                 }
                 cmd.Dispose();
             }
