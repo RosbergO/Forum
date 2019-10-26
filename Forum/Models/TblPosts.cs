@@ -43,7 +43,7 @@ VALUES(@author, @category, @name, @content, @date)";
             dbcommand.Parameters.Add("category", SqlDbType.Int).Value = postDetails.PoCategory;
             dbcommand.Parameters.Add("name", SqlDbType.NVarChar, 20).Value = postDetails.PoName;
             dbcommand.Parameters.Add("content", SqlDbType.NVarChar, 1000).Value = postDetails.PoContent;
-            dbcommand.Parameters.Add("date", SqlDbType.Date).Value = DateTime.Now;
+            dbcommand.Parameters.Add("date", SqlDbType.DateTime).Value = DateTime.Now;
 
             try
             {
@@ -70,7 +70,7 @@ VALUES(@author, @category, @name, @content, @date)";
             }
         }
 
-        public static List<TblPosts> GetPostsFromCategory(int i)
+        public static List<TblPosts> GetPostsFromCategory(int id)
         {
             List<TblPosts> postList = new List<TblPosts>();
             SqlConnection conn = null;
@@ -82,7 +82,7 @@ VALUES(@author, @category, @name, @content, @date)";
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("spGetPostsFromCategory", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Category_ID", i));
+                cmd.Parameters.Add(new SqlParameter("@Category_ID", id));
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -108,5 +108,46 @@ VALUES(@author, @category, @name, @content, @date)";
             }
             return postList;
         }
+
+        public static TblPosts GetPostFromID(int id)
+        {
+            TblPosts output = null;
+            SqlConnection conn = null;
+            SqlDataReader rdr = null;
+
+            try
+            {
+                conn = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("spGetPostsFromCategory", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Category_ID", id));
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    output = new TblPosts() { PoAuthor = int.Parse(rdr["Po_Author"].ToString()), PoCategory = int.Parse(rdr["Po_Category"].ToString()), PoContent = rdr["Po_Content"].ToString(), PoDate = Convert.ToDateTime(rdr["Po_Date"].ToString()), PoName = rdr["Po_Name"].ToString() };
+                }
+                cmd.Dispose();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
+
+            return output;
+        }
+
     }
 }
