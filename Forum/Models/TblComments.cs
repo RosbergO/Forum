@@ -59,5 +59,45 @@ namespace Forum.Models
             }
             return output;
         }
+
+        internal static int InsertComment(TblComments comment, out string message)
+        {
+                message = "";
+
+                SqlConnection dbConnection = new SqlConnection { ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" };
+                string sqlString = @"INSERT INTO [Tbl_Comments] ([Co_Author], [Co_Post], [Co_Content], [Co_Date])
+VALUES(@author, @post, @content, @date);";
+                SqlCommand dbcommand = new SqlCommand(sqlString, dbConnection);
+
+                dbcommand.Parameters.Add("author", SqlDbType.Int).Value = comment.CoAuthor;
+                dbcommand.Parameters.Add("post", SqlDbType.Int).Value = comment.CoPost;
+                dbcommand.Parameters.Add("content", SqlDbType.NVarChar, 1000).Value = comment.CoContent;
+                dbcommand.Parameters.Add("date", SqlDbType.DateTime).Value = DateTime.Now;
+
+                try
+                {
+                    dbConnection.Open();
+                    int i = 0;
+                    i = dbcommand.ExecuteNonQuery();
+                    if (i >= 1)
+                        message = "";
+                    else
+                    {
+                        message = "Could not create comment.";
+                    }
+
+                    return 1;
+                }
+                catch (Exception e)
+                {
+                    message = e.Message;
+                    return 0;
+                }
+                finally
+                {
+                    dbConnection.Close();
+                }
+            
+        }
     }
 }

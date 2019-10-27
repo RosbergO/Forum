@@ -18,35 +18,36 @@
             </td>
         </dl>
     </div>
-
-    <table>
-        <tbody>
-            @foreach (TblComments item in ViewBag.comments)
-            {
-                <tr>
-                    <td>
-                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                            @item.CoId
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                            @item.CoContent
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                            @item.CoDate
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                            @item.CoPost
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-
-    </table>
 </div>
+
+
+<h2>Comments</h2>
+
+<table>
+    <tbody>
+        @foreach (TblComments item in ViewBag.comments)
+        {
+            <tr>
+                <td>
+                    @item.CoId
+                </td>
+                <td>
+                    @item.CoContent
+                </td>
+                <td>
+                    @item.CoDate
+                </td>
+                <td>
+                    @item.CoPost
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div>
+    @Html.RenderAction("Create", "Comment", "", new { id = Model.PoId })
+</div>
+
+
