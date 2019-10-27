@@ -4,8 +4,7 @@
     ViewData["Title"] = "Read";
 }
 
-<h2><a>@ViewBag.category</a> > @Html.DisplayFor(Model => Model.PoName)</h2>
-
+<h2><a asp-controller="Category" asp-action="Posts" asp-route-id=@Model.PoCategory> @ViewBag.category</a> > @Html.DisplayFor(Model => Model.PoName)</h2>
 <div>
     <h4>TblPosts</h4>
     <hr />
