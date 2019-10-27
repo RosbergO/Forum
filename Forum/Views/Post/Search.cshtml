@@ -6,9 +6,6 @@
 
 
 <h2>Search</h2>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 @{
     if (Model.Count() > 0)
@@ -18,24 +15,14 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.PoId)
+                            <p>Post name</p>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PoName)
+                            <p>Content</p>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PoContent)
+                            <p>Posted on</p>
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PoDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PoAuthor)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PoCategory)
-                        </th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,27 +30,19 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PoId)
-                            </td>
-                            <td>
+                                <a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
                                 @Html.DisplayFor(modelItem => item.PoName)
+                                </a>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PoContent)
+                                <a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
+                                    @Html.DisplayFor(modelItem => item.PoContent)
+                                </a>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PoDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PoAuthor)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PoCategory)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                <a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
+                                    @Html.DisplayFor(modelItem => item.PoDate)
+                                </a>
                             </td>
                         </tr>
                     }

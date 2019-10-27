@@ -56,9 +56,8 @@ VALUES(@author, @category, @name, @content, @date)";
                 {
                     errorMessage = "Could not create post.";
                 }
-
-                return 1;
                 dbcommand.Dispose();
+                return 1;
             }
             catch (Exception e)
             {
@@ -149,6 +148,42 @@ VALUES(@author, @category, @name, @content, @date)";
 
             return output;
         }
+
+        public static int DeletePostFromID(int id, out string errorMessage)
+        {
+            errorMessage = "";
+
+            SqlConnection dbConnection = new SqlConnection { ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" };
+            string sqlString = "spDeletePostFromID";
+            SqlCommand dbcommand = new SqlCommand(sqlString, dbConnection);
+            dbcommand.CommandType = CommandType.StoredProcedure;
+            dbcommand.Parameters.Add("Post_ID", SqlDbType.Int).Value = id;
+            try
+            {
+                dbConnection.Open();
+                int i = 0;
+                i = dbcommand.ExecuteNonQuery();
+                if (i >= 1)
+                    errorMessage = "";
+                else
+                {
+                    errorMessage = "Could not create post.";
+                }
+                dbcommand.Dispose();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return 0;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
+
+
 
         public static List<TblPosts> GetPostsMatchingString(string input)
         {
