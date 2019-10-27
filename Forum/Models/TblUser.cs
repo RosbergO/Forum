@@ -17,6 +17,7 @@ namespace Forum.Models
         public string UsHash { get; set; }
         public string UsSalt { get; set; }
         public string UsEmail { get; set; }
+        public Boolean UsVerified { get; set; }
 
         public ICollection<TblPosts> TblPosts { get; set; }
 
@@ -57,6 +58,47 @@ namespace Forum.Models
                 }
             }
             return output;
+        }
+
+        internal static int Insert(TblUser user, out string errorMessage)
+        {
+            errorMessage = "";
+
+            SqlConnection dbConnection = new SqlConnection { ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" };
+            string sqlString = @"spInsertUser";
+            SqlCommand dbcommand = new SqlCommand(sqlString, dbConnection);
+            dbcommand.CommandType = CommandType.StoredProcedure;
+
+            dbcommand.Parameters.Add("name", SqlDbType.NVarChar, 20).Value = user.UsName;
+            dbcommand.Parameters.Add("hash", SqlDbType.NVarChar, 128).Value = user.UsHash;
+            dbcommand.Parameters.Add("salt", SqlDbType.NVarChar, 128).Value = user.UsSalt;
+            dbcommand.Parameters.Add("email", SqlDbType.NVarChar, 40).Value = user.UsEmail;
+            dbcommand.Parameters.Add("date", SqlDbType.DateTime).Value = DateTime.Now;
+
+            try
+            {
+                dbConnection.Open();
+                int i = 0;
+                i = dbcommand.ExecuteNonQuery();
+                if (i >= 1)
+                    errorMessage = "";
+                else
+                {
+                    errorMessage = "Could not create User.";
+                }
+
+                return 1;
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return 0;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+
         }
     }
 }

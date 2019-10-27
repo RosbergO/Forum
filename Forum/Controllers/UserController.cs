@@ -26,7 +26,12 @@ namespace Forum.Controllers
         [HttpPost]
         public IActionResult Create(TblUser user)
         {
+            //hash the salt in user
+            //we temporarily store the salted password in user.UsHash coming from the client
+            user.UsHash = Convert.ToBase64String(Security.Security.Hash(Convert.FromBase64String(user.UsHash), Convert.FromBase64String(user.UsSalt)));
             Console.WriteLine("Create user POST {0}", user.ToString());
+            TblUser.Insert(user, out string errorMessage);
+            ViewBag.errorMessage = errorMessage;
             return RedirectToAction("index", "Home");
         }
     }

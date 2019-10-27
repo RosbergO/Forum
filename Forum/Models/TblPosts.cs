@@ -58,6 +58,7 @@ VALUES(@author, @category, @name, @content, @date)";
                 }
 
                 return 1;
+                dbcommand.Dispose();
             }
             catch (Exception e)
             {
