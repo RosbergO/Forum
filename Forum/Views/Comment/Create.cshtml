@@ -11,7 +11,7 @@
                 <input asp-for="CoContent" class="form-control" />
                 <span asp-validation-for="CoContent" class="text-danger"></span>
             </div>
-            @Html.Hidden("CoAuthor", "4")
+            @Html.Hidden("CoAuthor", "2")
             @Html.Hidden("CoPost", (object)ViewBag.PostID)
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
