@@ -167,7 +167,7 @@ VALUES(@author, @category, @name, @content, @date)";
                     errorMessage = "";
                 else
                 {
-                    errorMessage = "Could not create post.";
+                    errorMessage = "Could not delete post.";
                 }
                 dbcommand.Dispose();
                 return 1;

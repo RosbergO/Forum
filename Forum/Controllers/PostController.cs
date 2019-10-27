@@ -22,6 +22,14 @@ namespace Forum.Controllers
             List<TblPosts> post = TblPosts.GetPostsMatchingString(input);
             return View(post);
         }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            string message = "";
+            TblPosts.DeletePostFromID(id, out message);
+            ViewBag.message = message;
+            return RedirectToAction("index", "Home");
+        }
 
         [HttpGet]
         public IActionResult Create(string id)
@@ -54,7 +62,6 @@ namespace Forum.Controllers
             ViewBag.users = users;
             return View(post);
         }
-
         public IActionResult Edit()
         {
 
