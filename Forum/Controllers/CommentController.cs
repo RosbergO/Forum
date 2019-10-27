@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Forum.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,9 +17,20 @@ namespace Forum.Controllers
             return View();
         }
 
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult Create(int id)
         {
-            return View();
+            ViewBag.PostID = id;
+            return PartialView();
+        }
+
+        [HttpPost]
+        public IActionResult Create(TblComments comment)
+        {
+            string message = "";
+            TblComments.InsertComment(comment, out message);
+            ViewBag.message = message;
+            return RedirectToAction("read/" + comment.CoPost, "Post");
         }
 
     }

@@ -32,7 +32,7 @@ namespace Forum.Models
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("spGetUserFromID", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Category_ID", i));
+                cmd.Parameters.Add(new SqlParameter("@User_ID", i));
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {

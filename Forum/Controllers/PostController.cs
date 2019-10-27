@@ -40,6 +40,12 @@ namespace Forum.Controllers
             TblPosts post = TblPosts.GetPostFromID(id);
             ViewBag.category = TblCategories.GetCategory(post.PoCategory);
             ViewBag.comments = TblComments.GetCommentsFromID(post.PoId);
+            Dictionary<int, string> users = new Dictionary<int, string>();
+            foreach (TblComments item in ViewBag.comments)
+            {
+                users[item.CoAuthor] = TblUser.GetUserFromID(item.CoAuthor).UsName;
+            }
+            ViewBag.users = users;
             return View(post);
         }
 
