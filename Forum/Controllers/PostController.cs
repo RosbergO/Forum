@@ -17,6 +17,12 @@ namespace Forum.Controllers
             return View();
         }
 
+        public IActionResult Search(string input)
+        {
+            List<TblPosts> post = TblPosts.GetPostsMatchingString(input);
+            return View(post);
+        }
+
         [HttpGet]
         public IActionResult Create(string id)
         {

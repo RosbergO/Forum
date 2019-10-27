@@ -25,7 +25,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="LoginOrRegister">Login or sign up</a></li>
-                    <li><input class="form-control" id="searchbar" type="text" placeholder="Search" aria-label="Search"></li>
+                    <li>
+                        <form asp-controller="Post" asp-action="Search">
+                            <p>
+                                <input type="text" name="input">
+                                <input type="submit" value="Search" />
+                            </p>
+                         </form>
+                    </li>
                 </ul>
             </div>
         </div>
