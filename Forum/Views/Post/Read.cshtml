@@ -1,5 +1,5 @@
 ﻿@model Forum.Models.TblPosts
-
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Read";
 }
@@ -16,13 +16,19 @@
                 <p>@Html.DisplayFor(model => model.PoContent)</p>
                 <p>Posted on @Html.DisplayFor(model => model.PoDate)</p>
             </td>
-            <td>
-                <form asp-controller="Post" asp-action="Delete" asp-route-id=@Model.PoId>
-                    <p>
-                        <input type="submit" value="Delete" />
-                    </p>
-                </form>
-            </td>
+            @{
+                if (Context.Session.GetInt32("ID") == Model.PoAuthor)
+                {
+                    <dt>
+                        <form asp-controller="Post" asp-action="Delete" asp-route-id=@Model.PoId>
+                            <p>
+                                <input type="submit" value="Delete" />
+                            </p>
+                        </form>
+                        <a asp-action="Edit" asp-route-id="@Model.PoId">Edit Post</a>
+                    </dt>
+                }
+            }
         </dl>
     </div>
 </div>
@@ -36,7 +42,7 @@
         {
             <tr>
                 <td>
-                    @{  
+                    @{
                         if (ViewBag.users[item.CoAuthor] == null)
                         {
                             WriteLiteral("deleted user");

@@ -184,6 +184,41 @@ VALUES(@author, @category, @name, @content, @date)";
         }
 
 
+        public static int EditPost(int id, string name, string content, out string errorMessage)
+        {
+            errorMessage = "";
+
+            SqlConnection dbConnection = new SqlConnection { ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" };
+            string sqlString = "spEditPost";
+            SqlCommand dbcommand = new SqlCommand(sqlString, dbConnection);
+            dbcommand.CommandType = CommandType.StoredProcedure;
+            dbcommand.Parameters.Add("id", SqlDbType.Int).Value = id;
+            dbcommand.Parameters.Add("name", SqlDbType.NVarChar, 20).Value = name;
+            dbcommand.Parameters.Add("content", SqlDbType.NVarChar, 1000).Value = content;
+            try
+            {
+                dbConnection.Open();
+                int i = 0;
+                i = dbcommand.ExecuteNonQuery();
+                if (i >= 1)
+                    errorMessage = "";
+                else
+                {
+                    errorMessage = "Could not delete post.";
+                }
+                dbcommand.Dispose();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return 0;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
 
         public static List<TblPosts> GetPostsMatchingString(string input)
         {
