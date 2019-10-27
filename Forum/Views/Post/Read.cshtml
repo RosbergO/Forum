@@ -5,46 +5,48 @@
 }
 
 <h2><a asp-controller="Category" asp-action="Posts" asp-route-id=@Model.PoCategory> @ViewBag.category</a> > @Html.DisplayFor(Model => Model.PoName)</h2>
-<div>
-    <hr/>
-    <dl class="dl-horizontal">
-        <td>
-            <h2>@Html.DisplayFor(model => model.PoName)</h2>
-        </td>
-        <td>
-            <p>@Html.DisplayFor(model => model.PoContent)</p>
-            <p>Posted on @Html.DisplayFor(model => model.PoDate)</p>
-        </td>
-    </dl>
+<div class="col-lg-12">
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <td>
+                <h2>@Html.DisplayFor(model => model.PoName)</h2>
+            </td>
+            <td>
+                <p>@Html.DisplayFor(model => model.PoContent)</p>
+                <p>Posted on @Html.DisplayFor(model => model.PoDate)</p>
+            </td>
+        </dl>
+    </div>
+
+    <table>
+        <tbody>
+            @foreach (TblComments item in ViewBag.comments)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
+                            @item.CoId
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
+                            @item.CoContent
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
+                            @item.CoDate
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
+                            @item.CoPost
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
 </div>
-
-<table>
-    <tbody>
-        @foreach (TblComments item in ViewBag.comments)
-        {
-            <tr>
-                <td>
-                    <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                        @item.CoId
-                    </a>
-                </td>
-                <td>
-                    <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                        @item.CoContent
-                    </a>
-                </td>
-                <td>
-                    <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                        @item.CoDate
-                    </a>
-                </td>
-                <td>
-                    <a asp-controller="Post" asp-action="Read" asp-route-id=@item.CoId>
-                        @item.CoPost
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-
-</table>

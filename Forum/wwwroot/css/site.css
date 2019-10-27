@@ -53,4 +53,14 @@ td a, p {
     display: block;
     padding: 16px;
     color: black;
+    word-break: break-all;
+    min-width: 10rem;
+}
+
+
+footer {
+    position: float;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
 }
