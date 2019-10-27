@@ -16,6 +16,13 @@
                 <p>@Html.DisplayFor(model => model.PoContent)</p>
                 <p>Posted on @Html.DisplayFor(model => model.PoDate)</p>
             </td>
+            <td>
+                <form asp-controller="Post" asp-action="Delete" asp-route-id=@Model.PoId>
+                    <p>
+                        <input type="submit" value="Delete" />
+                    </p>
+                </form>
+            </td>
         </dl>
     </div>
 </div>
