@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,15 +43,46 @@ namespace Forum.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult Login() => View();
 
         [HttpPost]
         public IActionResult Login(TblUser user)
         {
-            return View();
+
+
+            TblUser serverUser = TblUser.GetUserFromName(user.UsName);
+            if(serverUser == null)
+            {
+                ViewBag.errorMessage = "User doesn't exist.";
+                return RedirectToAction("Login");
+            }
+
+            user.UsSalt = serverUser.UsSalt;
+            byte[] salt = Convert.FromBase64String(user.UsSalt);
+            user.UsHash = user.UsHash.PadLeft(20, 'a');
+            byte[] password = Convert.FromBase64String(user.UsHash.ToString());
+            user.UsHash = Convert.ToBase64String(Security.Security.Hash(password, salt));
+
+            if(user.UsHash == serverUser.UsHash)
+            {
+                HttpContext.Session.SetInt32("ID", serverUser.UsId);
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                ViewBag.errorMessage = "Incorrect password";
+                return RedirectToAction("Login");
+            }
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetInt32("ID") != null)
+                HttpContext.Session.Set("ID", null);
+            return RedirectToAction("index", "Home");
+        }
+        
+
     }
 }
