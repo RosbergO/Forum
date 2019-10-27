@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace Forum.Models
 {
@@ -13,9 +14,14 @@ namespace Forum.Models
         }
 
         public int UsId { get; set; }
+        [Required(ErrorMessage = "Please provide username", AllowEmptyStrings = false)]
         public string UsName { get; set; }
+        [Required(ErrorMessage = "Please provide Password", AllowEmptyStrings = false)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be 8 char long.")]
         public string UsHash { get; set; }
         public string UsSalt { get; set; }
+        [RegularExpression(@"^([0-9a-zA-Z]([\+\-_\.][0-9a-zA-Z]+)*)+@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,3})$", ErrorMessage = "Please provide valid email id")]
         public string UsEmail { get; set; }
         public Boolean UsVerified { get; set; }
 
@@ -73,7 +79,6 @@ namespace Forum.Models
             dbcommand.Parameters.Add("hash", SqlDbType.NVarChar, 128).Value = user.UsHash;
             dbcommand.Parameters.Add("salt", SqlDbType.NVarChar, 128).Value = user.UsSalt;
             dbcommand.Parameters.Add("email", SqlDbType.NVarChar, 40).Value = user.UsEmail;
-            dbcommand.Parameters.Add("date", SqlDbType.DateTime).Value = DateTime.Now;
 
             try
             {

@@ -13,7 +13,7 @@ namespace Forum.Security
         {
             using (var rng = RandomNumberGenerator.Create())
             {
-                var randomNumber = new byte[SALTSIZE];
+                byte[] randomNumber = new byte[SALTSIZE];
 
                 rng.GetBytes(randomNumber);
 
@@ -23,7 +23,7 @@ namespace Forum.Security
 
         public static byte[] Hash(byte[] data, byte[] salt)
         {
-            using (var hmac = new HMACSHA512(salt))
+            using (HMACSHA512 hmac = new HMACSHA512(salt))
             {
                 return hmac.ComputeHash(data);
             }
