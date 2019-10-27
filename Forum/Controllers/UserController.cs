@@ -66,6 +66,7 @@ namespace Forum.Controllers
             if(user.UsHash == serverUser.UsHash)
             {
                 HttpContext.Session.SetInt32("ID", serverUser.UsId);
+                HttpContext.Session.SetString("Name", serverUser.UsName);
                 return RedirectToAction("index", "Home");
             }
             else
@@ -79,7 +80,11 @@ namespace Forum.Controllers
         public IActionResult Logout()
         {
             if (HttpContext.Session.GetInt32("ID") != null)
-                HttpContext.Session.Set("ID", null);
+            {
+                HttpContext.Session.Remove("ID");
+                HttpContext.Session.Remove("Name");
+
+            }
             return RedirectToAction("index", "Home");
         }
         
