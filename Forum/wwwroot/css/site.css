@@ -53,8 +53,9 @@ td a, p {
     display: block;
     padding: 16px;
     color: black;
+}
+.PostContent {
     word-break: break-all;
-    min-width: 10rem;
 }
 
 
