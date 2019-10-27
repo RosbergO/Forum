@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MonterPlan Forum</title>
+    <title>@ViewData["Title"] - MonsterPlan Forum</title>
 
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -25,10 +25,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="User" asp-action="Login">Login or sign up</a></li>
-                    <li>@Context.Session.GetInt32("ID")</li>
+                    @{ if (@Context.Session.GetInt32("ID") != null)
+                        {
+                            <li><a asp-area="" asp-controller="User" asp-action="Logout">Logout</a></li>
 
-                    <li><a asp-area="" asp-controller="User" asp-action="Logout">Logout</a></li>
+                            <li><a asp-area="" asp-controller="User" asp-action="Read" asp-route-id=@Context.Session.GetInt32("ID")>@Context.Session.GetString("Name")</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="User" asp-action="Login">Login or sign up</a></li>
+                        }
+                    }
                     <li>
                         <form asp-controller="Post" asp-action="Search">
                             <p>
@@ -48,7 +55,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - Forum</p>
+            <p>&copy; 2019 - MonsterPlan Forum</p>
         </footer>
     </div>
 

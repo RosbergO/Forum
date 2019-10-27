@@ -7,29 +7,32 @@
 <h1>Welcome to the MonsterPlan forum</h1>
 
 <tbody>
-    </tbody>
-    <div id="LatestPosts">
-        <h3>Latest Posts</h3>
-        <ul class="list-group">
-            @foreach (var item in Model){
-                <li class="list-group-item"><a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
-                @{if (item.PoContent.Length > 60)
-                    {
+</tbody>
+<div id="LatestPosts">
+    <h3>Latest Posts</h3>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                <a asp-controller="Post" asp-action="Read" asp-route-id=@item.PoId>
+                    @{if (item.PoContent.Length > 60)
+                        {
 
-                        item.PoContent = item.PoContent.Substring(0, Math.Min(item.PoContent.Length, 60)) + "...";
+                            item.PoContent = item.PoContent.Substring(0, Math.Min(item.PoContent.Length, 60)) + "...";
+                        }
+                        @Html.DisplayFor(modelItem => item.PoContent);
                     }
-                    @Html.DisplayFor(modelItem => item.PoContent);
-                }
-                </a></li>
-            }
-        </ul>
-    </div>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
 
-    <div id="">
-        <h3>Forum categories</h3>
-        <ul class="list-group">
-            <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="1">General</a></li>
-            <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="2">Off Topic</a></li>
-            <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="3">Questions</a></li>
-        </ul>
-    </div>
+<div id="">
+    <h3>Forum categories</h3>
+    <ul class="list-group">
+        <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="1">General</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="2">Off Topic</a></li>
+        <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="3">Questions</a></li>
+    </ul>
+</div>

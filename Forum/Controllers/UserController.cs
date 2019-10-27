@@ -18,6 +18,12 @@ namespace Forum.Controllers
             return View();
         }
 
+        public IActionResult Read(int id)
+        {
+            TblUser user = TblUser.GetUserFromID(id);
+            return View(user);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -51,7 +57,7 @@ namespace Forum.Controllers
 
 
             TblUser serverUser = TblUser.GetUserFromName(user.UsName);
-            if(serverUser == null)
+            if(serverUser.UsName == null)
             {
                 ViewBag.errorMessage = "User doesn't exist.";
                 return RedirectToAction("Login");
