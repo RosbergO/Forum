@@ -150,7 +150,7 @@ VALUES(@author, @category, @name, @content, @date)";
             return output;
         }
 
-        public static List<TblPosts> Get(int id)
+        public static List<TblPosts> GetPostsMatchingString(string input)
         {
             List<TblPosts> postList = new List<TblPosts>();
             SqlConnection conn = null;
@@ -160,9 +160,9 @@ VALUES(@author, @category, @name, @content, @date)";
             {
                 conn = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=MonsterPlan;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("spGetPostsFromCategory", conn);
+                SqlCommand cmd = new SqlCommand("spGetPostsMatchingString", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Category_ID", id));
+                cmd.Parameters.Add(new SqlParameter("@string", input));
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
