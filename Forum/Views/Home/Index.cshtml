@@ -27,10 +27,12 @@
         }
     </ul>
 </div>
+@Html.RenderAction("Read", "Category", "")
 
 <div id="">
     <h3>Forum categories</h3>
     <ul class="list-group">
+        <
         <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="1">General</a></li>
         <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="2">Off Topic</a></li>
         <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id="3">Questions</a></li>

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Forum.Models.TblCategories>
+
+
+
+}<div id="">
+    <h3>Forum categories</h3>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                @Html.DisplayFor(modelItem => item.CaId)
+                @Html.DisplayFor(modelItem => item.CaName)
+            </li>
+        }
+       </ul>
+</div>
