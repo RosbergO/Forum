@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<Forum.Models.TblCategories>
-
-
-
-}<div id="">
+@using Microsoft.AspNetCore.Http
+<div id="">
     <h3>Forum categories</h3>
+    @{
+        if (Context.Session.GetInt32("ID") == 0) //Make create category button visible only for root
+        {
+            <button type="button" class="btn btn-primary">
+                <a asp-area="" asp-controller="Category" asp-action="Create">Create new category</a>
+            </button>
+        }
+    }
     <ul class="list-group">
         @foreach (var item in Model)
         {
-            <li class="list-group-item">
-                @Html.DisplayFor(modelItem => item.CaId)
-                @Html.DisplayFor(modelItem => item.CaName)
-            </li>
+            <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Posts" asp-route-id=@item.CaId>@Html.DisplayFor(modelItem => item.CaName)</a></li>
         }
-       </ul>
+    </ul>
 </div>

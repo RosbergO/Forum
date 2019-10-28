@@ -22,9 +22,9 @@ namespace Forum.Controllers
         [HttpGet]
         public IActionResult Create(string id)
         {
-            if (HttpContext.Session.GetInt32("ID") != 4)
+            if (HttpContext.Session.GetInt32("ID") != 0)
             {
-                return RedirectToAction("Category", "posts");
+                return RedirectToAction("Index", "Home");
             }
             int category = TblCategories.GetCategory(id);
             ViewBag.categoryID = category;
@@ -35,9 +35,9 @@ namespace Forum.Controllers
         [HttpPost]
         public IActionResult Create(TblCategories category)
         {
-            if(HttpContext.Session.GetInt32("ID") != 4)
+            if(HttpContext.Session.GetInt32("ID") != 0)
             {
-                return RedirectToAction("Category", "posts");
+                return RedirectToAction("Index", "Home");
             }
             string message = "";
             ViewBag.message = message;

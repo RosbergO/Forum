@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,6 +28,10 @@ namespace Forum.Controllers
         [HttpPost]
         public IActionResult Create(TblComments comment)
         {
+            if(HttpContext.Session.GetInt32("ID") == null)
+            {
+                return RedirectToAction("read/" + comment.CoPost, "Post");
+            }
             string message = "";
             TblComments.InsertComment(comment, out message);
             ViewBag.message = message;
