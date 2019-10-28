@@ -83,7 +83,7 @@ namespace Forum.Models
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    output = new TblUser() { UsId = int.Parse(rdr["Us_ID"].ToString()), UsName = rdr["Us_Name"].ToString(), UsEmail = rdr["Us_Email"].ToString(), UsSalt = rdr["Us_Salt"].ToString(), UsHash = rdr["Us_Hash"].ToString() };
+                    output = new TblUser() { UsId = int.Parse(rdr["Us_ID"].ToString()), UsName = rdr["Us_Name"].ToString(), UsEmail = rdr["Us_Email"].ToString(), UsSalt = rdr["Us_Salt"].ToString(), UsHash = rdr["Us_Hash"].ToString(), UsVerified = rdr["Us_Verified"].ToString() == "True" ? true : false };
                 }
                 cmd.Dispose();
             }

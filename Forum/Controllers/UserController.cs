@@ -97,6 +97,9 @@ namespace Forum.Controllers
             {
                 HttpContext.Session.SetInt32("ID", serverUser.UsId);
                 HttpContext.Session.SetString("Name", serverUser.UsName);
+                string x = serverUser.UsVerified.ToString();
+                int verified = x == "False" ? 0 : 1;
+                HttpContext.Session.SetInt32("Verified", verified);
                 return RedirectToAction("index", "Home");
             }
             else
@@ -113,6 +116,7 @@ namespace Forum.Controllers
             {
                 HttpContext.Session.Remove("ID");
                 HttpContext.Session.Remove("Name");
+                HttpContext.Session.Remove("Verified");
 
             }
             return RedirectToAction("index", "Home");

@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    int? verified = Context.Session.GetInt32("Verified");
+}
+    
+@if (verified == 0)
+{
+    <div class="container" style="background-color: chocolate; width: auto; text-align: justify; ">
+        <div class="collapse navbar-collapse">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="navbar-text">
+                        Verify your email today!
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <p class="navbar-text">
+                        Verify your email today!
+                    </p>
+                </div><div class="col-sm-4">
+                    <p class="navbar-text">
+                        Verify your email today!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
