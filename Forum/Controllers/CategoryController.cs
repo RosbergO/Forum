@@ -22,7 +22,7 @@ namespace Forum.Controllers
         [HttpGet]
         public IActionResult Create(string id)
         {
-            if (HttpContext.Session.GetInt32("ID") != 0)
+            if (HttpContext.Session.GetInt32("ID") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -35,7 +35,7 @@ namespace Forum.Controllers
         [HttpPost]
         public IActionResult Create(TblCategories category)
         {
-            if(HttpContext.Session.GetInt32("ID") != 0)
+            if(HttpContext.Session.GetInt32("ID") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }

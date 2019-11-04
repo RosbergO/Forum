@@ -3,7 +3,7 @@
 <div id="">
     <h3>Forum categories</h3>
     @{
-        if (Context.Session.GetInt32("ID") == 0) //Make create category button visible only for root
+        if (Context.Session.GetInt32("ID") == 1) //Make create category button visible only for root
         {
             <button type="button" class="btn btn-primary">
                 <a asp-area="" asp-controller="Category" asp-action="Create">Create new category</a>
