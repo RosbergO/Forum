@@ -61,7 +61,6 @@ namespace Forum.Controllers
             string link = $@"https://localhost:44316/{verifyURL}";
             string fromEmail = "monsterplanforum@gmail.com";
             string toEmail = user.UsEmail;
-            string fromEmailPassword = "passwordisdees";
             string subject = "Verify your email today!";
             string body = "<br/><br/>We are excited to tell you that your Dotnet Awesome account is" +
         " successfully created. Please click on the below link to verify your account" +
