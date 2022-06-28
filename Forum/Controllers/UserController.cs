@@ -149,7 +149,7 @@ namespace Forum.Controllers
             MailMessage usermail = Mailbodplain(fromad, toad, body, header, subjectcontent);
             SmtpClient client = new SmtpClient();
             //Add the Creddentials- use your own email id and password
-            client.Credentials = new System.Net.NetworkCredential("monsterplanforum@gmail.com ", "passwordisdees"); ;
+            client.Credentials = new System.Net.NetworkCredential("monsterplanforum@gmail.com ", "<redacted>"); ; //implement with secrets.json
 
             client.Host = "smtp.gmail.com";
             client.Port = 587;
